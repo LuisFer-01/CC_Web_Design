@@ -10,7 +10,7 @@ import Gates from '../../../assets/img/brands/GATES.png';
 import GMORS from '../../../assets/img/brands/GMORS.jpg';
 import HERCULES from '../../../assets/img/brands/HERCULES.jpg';
 import INA from '../../../assets/img/brands/INA.jpg';
-import Jason from '../../../assets/img/brands/JASON MEGADYNE.jpg';
+import Jason from '../../../assets/img/brands/JASON_MEGADYNE.jpg';
 import KFB from '../../../assets/img/brands/KFB.png';
 import Mitsuba from '../../../assets/img/brands/mitsuba.jpg';
 import NSK from '../../../assets/img/brands/NSK.png';

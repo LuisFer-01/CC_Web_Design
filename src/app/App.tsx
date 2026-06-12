@@ -1,3 +1,4 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
 import Navigation from './components/Navigation';
 import Brands from './components/views/landing/Brands';
@@ -8,20 +9,40 @@ import Industries from './components/views/landing/Industries';
 import Locations from './components/views/landing/Locations';
 import Products from './components/views/landing/Products';
 import Services from './components/views/landing/Services';
+import ProductsPage from './components/views/products';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-white">
-      <Navigation />
-      <Hero />
-      <Products />
-      <Brands />
-      <Services />
-      <Industries />
-      <Differentials />
-      <Locations />
-      <Contact />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div className="min-h-screen bg-white">
+              <Navigation />
+              <Hero />
+              <Products />
+              <Brands />
+              <Services />
+              <Industries />
+              <Differentials />
+              <Locations />
+              <Contact />
+              <Footer />
+            </div>
+          }
+        />
+        <Route
+          path="/products"
+          element={
+            <div className="min-h-screen bg-white">
+              <Navigation />
+              <ProductsPage />
+              <Footer />
+            </div>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }

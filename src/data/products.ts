@@ -784,6 +784,5 @@ export const brands = [
   'Gates', 'Mitsuba', 'Megadyne', 'PIX', 'Perfect Power',
   'Jason', 'ZMTE', 'Pabovi', 'Semper',
   'SKF', 'FAG', 'INA', 'NSK', 'NTN', 'FBJ', 'KFB', 'F&D',
-  'SAV', 'ARCA', 'GMORS', 'HERCULES', 'APC', 'WORLD GASKET',
-  'Tsubaki', 'SMC', 'Correas Center', 'DID', 'THK', 'Sky Rubbers'
+  'SAV', 'ARCA', 'GMORS', 'HERCULES', 'APC', 'WORLD GASKET'
 ];

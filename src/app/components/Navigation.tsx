@@ -1,7 +1,6 @@
 import { ChevronDown, ChevronRight, Menu, Phone, X } from 'lucide-react';
 import { useState } from 'react';
 import CCBlanco from "../assets/img/navigation/Logo_CC_Blanco.png";
-//import CCNegro from "../assets/img/navigation/Logo_CC_Negro.png";
 
 const productCategories = [
   {
@@ -70,7 +69,11 @@ const productCategories = [
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [showProducts, setShowProducts] = useState(false);
-  const [activeCategory, setActiveCategory] = useState<number | null>(null);;
+  const [activeCategory, setActiveCategory] = useState<number | null>(null);
+
+  const handleCategoryClick = (index: number) => {
+    setActiveCategory(activeCategory === index ? null : index);
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 bg-[#EA0A2A] z-50 shadow-lg">
@@ -81,7 +84,7 @@ export default function Navigation() {
               <img 
                 src={CCBlanco}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
+              />
             </div>
             <div className="text-white">
               <h1 className="text-2xl font-bold tracking-tight">CORREAS CENTER</h1>
@@ -104,46 +107,54 @@ export default function Navigation() {
                 <ChevronDown size={18} className={`transition-transform duration-200 ${showProducts ? 'rotate-180' : ''}`} />
               </button>
 
-              {/* Contenedor del mega menú CON SCROLL */}
+              {/* Contenedor del mega menú - Altura adaptable al contenido */}
               <div
-                className={`absolute top-full left-0 w-[900px] bg-white rounded-lg shadow-2xl border border-gray-200 p-6 -translate-x-1/4 transition-all duration-200 max-h-[85vh] overflow-y-auto ${
+                className={`absolute top-full left-0 w-[550px] bg-white rounded-lg shadow-2xl border border-gray-200 p-6 -translate-x-1/4 transition-all duration-300 max-h-[85vh] overflow-y-auto ${
                   showProducts ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2 pointer-events-none'
                 }`}
               >
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-2 gap-4">
                   {productCategories.map((category, index) => (
                     <div 
                       key={index} 
                       className="relative"
-                      onMouseEnter={() => setActiveCategory(index)}
-                      onMouseLeave={() => setActiveCategory(null)}
                     >
-                      {/* Categoría principal */}
-                      <div className="flex items-center justify-between cursor-pointer group">
-                        <h3 className="font-bold text-[#EA0A2A] text-sm uppercase tracking-wide border-b-2 border-[#EA0A2A] pb-2">
+                      {/* Categoría principal - AHORA CON CLICK */}
+                      <div 
+                        className="flex items-center justify-between cursor-pointer group pb-2 border-b-2 border-[#EA0A2A]"
+                        onClick={() => handleCategoryClick(index)}
+                      >
+                        <h3 className="font-bold text-[#EA0A2A] text-sm uppercase tracking-wide">
                           {category.name}
                         </h3>
-                        <ChevronRight size={16} className="text-[#EA0A2A] transition-transform group-hover:translate-x-1" />
+                        <ChevronRight 
+                          size={16} 
+                          className={`text-[#EA0A2A] transition-transform duration-300 ${
+                            activeCategory === index ? 'rotate-90' : 'group-hover:translate-x-1'
+                          }`} 
+                        />
                       </div>
 
-                      {/* Subcategorías - Se muestran solo al hacer hover en esta categoría */}
+                      {/* Subcategorías - Se muestran al hacer clic, en flujo normal para adaptar altura */}
                       <div 
-                        className={`absolute left-0 top-full mt-2 w-64 bg-gray-50 rounded-lg shadow-lg border border-gray-200 p-4 z-10 transition-all duration-200 ${
-                          activeCategory === index ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2 pointer-events-none'
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                          activeCategory === index ? 'max-h-[500px] opacity-100 mt-2' : 'max-h-0 opacity-0 mt-0'
                         }`}
                       >
-                        <ul className="space-y-2">
-                          {category.subcategories.map((sub, subIndex) => (
-                            <li key={subIndex}>
-                              <a
-                                href={`#productos?category=${encodeURIComponent(category.name)}&sub=${encodeURIComponent(sub)}`}
-                                className="text-gray-700 hover:text-[#EA0A2A] text-sm block py-2 px-3 rounded hover:bg-white transition-all"
-                              >
-                                {sub}
-                              </a>
-                            </li>
-                          ))}
-                        </ul>
+                        <div className="bg-gray-50 rounded-lg border border-gray-200 p-3">
+                          <ul className="space-y-1">
+                            {category.subcategories.map((sub, subIndex) => (
+                              <li key={subIndex}>
+                                <a
+                                  href={`#productos?category=${encodeURIComponent(category.name)}&sub=${encodeURIComponent(sub)}`}
+                                  className="text-gray-700 hover:text-[#EA0A2A] text-sm block py-1.5 px-3 rounded hover:bg-white transition-all"
+                                >
+                                  {sub}
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -154,10 +165,6 @@ export default function Navigation() {
             <a href="#servicios" className="text-white hover:text-gray-200 transition-colors">Servicios</a>
             <a href="#industrias" className="text-white hover:text-gray-200 transition-colors">Industrias</a>
             <a href="#contacto" className="text-white hover:text-gray-200 transition-colors">Contacto</a>
-            <a href="tel:+59133333333" className="flex items-center gap-2 bg-white text-[#EA0A2A] px-4 py-2 rounded-md hover:bg-gray-100 transition-colors font-medium">
-              <Phone size={18} />
-              Llamar
-            </a>
           </div>
 
           <button

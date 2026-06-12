@@ -1,37 +1,50 @@
 import { useEffect, useState } from 'react';
 
-import APC from '../assets/img/brands/APC.png';
-import FD from '../assets/img/brands/F&D.png';
-import GMORS from '../assets/img/brands/GMORS.jpg';
-import HERCULES from '../assets/img/brands/HERCULES.jpg';
-import INA from '../assets/img/brands/INA.jpg';
-import KFB from '../assets/img/brands/KFB.png';
-import PerfectPower from '../assets/img/brands/Perfect Power.png';
-import Pix from '../assets/img/brands/PIX.jpg';
-import SKF from '../assets/img/brands/SKF-DISTRIBUIDOR-ESPECIALISTA-EN-SELLOS-HORIZONTAL.png';
+import Abix from '../../../assets/img/brands/ABIX.png';
+import APC from '../../../assets/img/brands/APC.png';
+import Arca from '../../../assets/img/brands/ARCA.png';
+import FD from '../../../assets/img/brands/F&D.png';
+import FAG from '../../../assets/img/brands/FAG-2.png';
+import FBJ from '../../../assets/img/brands/FBJ.png';
+import Gates from '../../../assets/img/brands/GATES.png';
+import GMORS from '../../../assets/img/brands/GMORS.jpg';
+import HERCULES from '../../../assets/img/brands/HERCULES.jpg';
+import INA from '../../../assets/img/brands/INA.jpg';
+import Jason from '../../../assets/img/brands/JASON MEGADYNE.jpg';
+import KFB from '../../../assets/img/brands/KFB.png';
+import Mitsuba from '../../../assets/img/brands/mitsuba.jpg';
+import NSK from '../../../assets/img/brands/NSK.png';
+import NTN from '../../../assets/img/brands/NTN.png';
+import Pabovi from '../../../assets/img/brands/Pabovi.png';
+import PerfectPower from '../../../assets/img/brands/Perfect Power.png';
+import Pix from '../../../assets/img/brands/PIX.jpg';
+import Sav from '../../../assets/img/brands/SAV.png';
+import SKF from '../../../assets/img/brands/SKF-DISTRIBUIDOR-ESPECIALISTA-EN-SELLOS-HORIZONTAL.png';
+import WorldG from '../../../assets/img/brands/WORLD GASKET.png';
+import ZMTE from '../../../assets/img/brands/ZMTE.png';
 
 const brands = [
   { name: 'PERFECT POWER', logo: PerfectPower },
   { name: 'SKF', logo: SKF },
-  { name: 'SAV', logo: 'https://iconape.com/wp-content/png_logo_vector/sav-retenes-logo.png' },
-  { name: 'ARCA', logo: 'https://www.boliviaentusmanos.com/amarillas/businesscard/certificaciones-medicos/arca-retenedores.jpg' },
-  { name: 'FAG', logo: 'https://cdn.freebiesupply.com/logos/large/2x/fag-2-logo-png-transparent.png' },
+  { name: 'SAV', logo: Sav },
+  { name: 'ARCA', logo: Arca },
+  { name: 'FAG', logo: FAG },
   { name: 'INA', logo: INA },
-  { name: 'NSK', logo: 'https://images.seeklogo.com/logo-png/10/1/nsk-logo-png_seeklogo-101282.png' },
-  { name: 'NTN', logo: 'https://logodix.com/logo/1888827.png' },
-  { name: 'JASON MEGADYNE', logo: 'https://bandasybandas.co/wp-content/uploads/2022/03/logo-jason-300x176.png' },
-  { name: 'MITSUBA', logo: 'https://i0.wp.com/haneimotors.com/wp-content/uploads/2023/02/marcas-mitsuba.jpg?fit=271%2C155&ssl=1' },
-  { name: 'GATES', logo: 'https://logos-world.net/wp-content/uploads/2022/07/Gates-Symbol.png' },
-  { name: 'ABIX', logo: 'https://www.abactransmisiones.com.ar/storage/brands/abix.jpg' },
+  { name: 'NSK', logo: NSK },
+  { name: 'NTN', logo: NTN },
+  { name: 'JASON MEGADYNE', logo: Jason },
+  { name: 'MITSUBA', logo: Mitsuba },
+  { name: 'GATES', logo: Gates },
+  { name: 'ABIX', logo: Abix },
   { name: 'PIX', logo: Pix },
-  { name: 'ZMTE', logo: 'https://media.licdn.com/dms/image/v2/D4D16AQFBegh09-0A5A/profile-displaybackgroundimage-shrink_200_800/profile-displaybackgroundimage-shrink_200_800/0/1665370759641?e=1781740800&v=beta&t=Egqk0pEUbCqkTc_skXjpQz3Rdu661Hi_tv1DjlBDQKw' },
-  { name: 'Pabovi', logo: 'https://worldplasticconnectionsummit.com/wp-content/uploads/2025/06/Logo-Pabovi-exp-2023-1.png' },
+  { name: 'ZMTE', logo: ZMTE },
+  { name: 'Pabovi', logo: Pabovi },
   { name: 'APC', logo: APC },
   { name: 'GMORS', logo: GMORS },
   { name: 'HERCULES', logo: HERCULES },
-  { name: 'WORLD GASKET', logo: 'https://ellegi.com/wp-content/uploads/2024/10/Logo-World-Gasket-Ellegi-SC-Bi-Pos-RGB.png' },
+  { name: 'WORLD GASKET', logo: WorldG },
   { name: 'F&D', logo: FD },
-  { name: 'FBJ', logo: 'https://images.seeklogo.com/logo-png/5/1/fbj-bearings-logo-png_seeklogo-52396.png' },
+  { name: 'FBJ', logo: FBJ },
   { name: 'KFB', logo: KFB },
 ];
 

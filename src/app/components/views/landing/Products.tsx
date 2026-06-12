@@ -1,27 +1,41 @@
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 //import CangilonImg from '../assets/images/products/cangilones.png';
-import ComandosImg from '../assets/img/products/Comandos.jpg';
-import MangueraImg from '../assets/img/services/Manguera_Prensada.jpeg';
+import AbrazaderasImg from '../../../assets/img/products/Abrazaderas.jpg';
+import BandasLImg from '../../../assets/img/products/Bandas_Transportadoras_Livianas.png';
+import BandasPImg from '../../../assets/img/products/Bandas_Transportadoras_Pesadas.jpg';
+import CadenasImg from '../../../assets/img/products/Cadenas.jpg';
+import CangilonesImg from '../../../assets/img/products/Cangilon.jpg';
+import CardanesImg from '../../../assets/img/products/Cardanes.jpg';
+import CilindrosNImg from '../../../assets/img/products/Cilindro_Neumatico.jpg';
+import ComandosImg from '../../../assets/img/products/Comandos.jpg';
+import CorreasImg from '../../../assets/img/products/Correas.jpg';
+import ManguerasImg from '../../../assets/img/products/Mangueras.jpg';
+import NiplesImg from '../../../assets/img/products/Niples_Casquillos_ConectoresHidraulicos.png';
+import PiñonesImg from '../../../assets/img/products/Piñones.jpg';
+import PoleasImg from '../../../assets/img/products/Poleas.jpg';
+import RetenesImg from '../../../assets/img/products/Retenes_Sellos_Cubetas.png';
+import RodamientosImg from '../../../assets/img/products/Rodamientos.jpg';
+import MangueraImg from '../../../assets/img/services/Manguera_Prensada.jpeg';
 
 const products = [
   {
     name: 'Correas',
-    image: 'https://m.media-amazon.com/images/I/91GyI2-4kVL._SX522_.jpg',
+    image: CorreasImg,
     description: 'Correas industriales de alta resistencia para transmisión de potencia',
     subcategories: ['Correas en V', 'Correas Dentadas', 'Correas Variadoras', 
                     'Correas Acanaladas']
   },
   {
     name: 'Mangueras',
-    image: 'https://jasonhosesolutions.com/wp-content/uploads/2025/11/about-us.jpg',
+    image: ManguerasImg,
     description: 'Mangueras de alta presión para sistemas hidráulicos industriales',
     subcategories: ['Mangueras Hidráulicas', 'Mangueras de Succión y de Descarga', 
                     'Mangueras Multiusos', 'Mangueras Neumaticas']
   },
   {
     name: 'Rodamientos',
-    image: 'https://balerytodo.com/wp-content/uploads/2024/11/rods.jpg',
+    image: RodamientosImg,
     description: 'Rodamientos de precisión de las mejores marcas internacionales',
     subcategories: ['Rodamientos de Rodillos', 'Rodamientos de Bolas', 'Rodamientos de Agujas', 
                     'Rodamientos Axiales', 'Rodamientos Lineales', 'Rodamientos Esfericos', 
@@ -29,65 +43,65 @@ const products = [
   },
   {
     name: 'Retenes, Sellos y O-rings',
-    image: 'https://www.o-ring.com.ar/files/2018/04/productos-argensold.png',
+    image: RetenesImg,
     description: 'Elementos de sellado industrial para prevenir fugas y proteger componentes mecánicos.',
     subcategories: ['Retenes', 'Sellos Mecánicos', 'O-Rings', 'Sellos Hidráulicos', 
                     'Sellos Neumáticos']
   },
   {
     name: 'Bandas Transportadoras Pesadas',
-    image: 'https://s.alicdn.com/@sc04/kf/H2196f70a04294cdc9b46f00606d2a64bx/Competitive-Price-Rubber-Conveyor-Belt-Ep-Ee-Conveyor-Belts-Rubber-Conveyor-Belts.jpg_300x300.jpg',
+    image: BandasPImg,
     description: 'Bandas para transporte de materiales en minería e industria',
     subcategories: ['Bandas Lisas', 'Bandas Nervadas', 'Bandas Verticales', 'Bandas con Bordes', 
                     'Bandas Corrugadas']
   },
   {
     name: 'Bandas Transportadoras Livianas',
-    image: 'https://belter.com.ar/storage/categorias/bandas-transportadoras.png',
+    image: BandasLImg,
     description: 'Bandas para transporte de materiales para industria alimenticia',
     subcategories: ['Bandas Sinteticas', 'Bandas Modulares', 'Bandas de PTFE', 'Bandas Homogéneas', 'Bandas de Caucho Ligeras']
   },
   {
     name: 'Cadenas',
-    image: 'https://hvhindustrial.com/images/frontend_images/categories/1651820230roller-chain-specialty-agricultural-chain.jpg',
+    image: CadenasImg,
     description: 'Cadenas de transmisión y transporte para aplicaciones pesadas',
     subcategories: ['Cadenas de Rodillos de Precisión', 'Cadenas de Acero Inoxidable', 
                     'Cadenas de Transmisión', 'Cadenas con Transportador', 'Cadenas Agricolas']
   },
   {
     name: 'Poleas',
-    image: 'https://challengeptorigmedia.b-cdn.net/img/products/Pulleys-Main-300x300.jpg',
+    image: PoleasImg,
     description: 'Elementos de transmisión de potencia diseñados para optimizar el movimiento en sistemas de correas y bandas.',
     subcategories: ['Poleas en V de Taladro Conico Y Cilindrico', 'Poleas  Sincronas', 'Poleas MI-Lock']
   },
   {
     name: 'Piñones',
-    image: 'https://challengeptorigmedia.b-cdn.net/img/products/Sprokets-Main-300x300.jpg',
+    image: PiñonesImg,
     description: 'Componentes de precisión para transmisión de movimiento en sistemas de cadenas y maquinaria industrial.',
     subcategories: ['Piñónes de taladro cónico ', 'Piñónes con agujero piloto', 
                     'Piñónes simples de taladro cónico para 2 cadenas', 'Piñónes simples con agujero piloto para 2 cadenas']
   },
   {
     name: 'Niples, Conexiones y Conectores Hidraúlicos',
-    image: 'https://emmflex.cl/wp-content/uploads/2022/11/producto-emmflex-17-1.png',
+    image: NiplesImg,
     description: 'Conexiones hidráulicas, neumáticas de precisión y conectores y accesorios para sistemas neumáticos',
     subcategories: ['Niples Hidráulicos', 'Niples de Cobre', 'Conexiones Rápidas', 'Adaptadores', 'Conectores Rápidos']
   },
   {
     name: 'Cilindros Hidraúlicos y Neúmaticos',
-    image: 'http://emc-ecuador.com/wp-content/uploads/2013/10/20120705033639-260x300.jpg',
+    image: CilindrosNImg,
     description: 'Componentes neumáticos y patentados para optimizar movimientos y conexiones.',
     subcategories: ['Cilindros Neumáticos', 'Cilindros HTR (Tirantes)', 'Cilindros HCW (Patentado)']
   },
   {
     name: 'Cangilones',
-    image: 'https://spinozziargentina.com/wp-content/uploads/2023/08/image37-1024x768.jpg',
+    image: CangilonesImg,
     description: 'Elementos de elevación y transporte de materiales en sistemas de bandas transportadoras verticales.',
     subcategories: ['Cangilones HD Stax (Heavy Duty)', 'Cangilones de Nylon', 'Cangilones de Poliuretano', 'Pernos', 'Grapas de Empalme Mécanico', 'Laterales(Sky Rubbers)']
   },
   {
     name: 'Cardanes',
-    image: 'https://soto.com.co/assets/media/cardanes/pto-spline-shaft-splined-shape-harvester-tractor-flexible-universal-joint-pto-drive-cardan-shaft-for-agricultural-machine-tractor-pto-shaft.jpg?u=1720718434',
+    image: CardanesImg,
     description: 'Sistemas de transmisión de potencia para maquinaria agrícola e industrial.',
     subcategories: ['Cardanes Agricolas']
   },
@@ -101,7 +115,7 @@ const products = [
   },
   {
     name: 'Abrazaderas',
-    image: 'https://www.wurth.com.ar/blog/wp-content/uploads/2024/05/ABRAZADERA-INDUSTRIAL-2023.jpg',
+    image: AbrazaderasImg,
     description: 'Elementos de sujeción y fijación para mangueras, tuberías y componentes industriales.',
     subcategories: ['Abrazaderas Galvanizadas', 'Abrazaderas Inoxidables', 'Abrazaderas de Tornillo', 'Abrazaderas de Alambre']
   },

@@ -1,16 +1,12 @@
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
-import CintaTrFImg from "../assets/img/hero/Cinta transportadora Fabrica.jpeg";
-import CintaTrCImg from "../assets/img/hero/Cinta_transportadora_Cargada.png";
-/* import CCMono from "../assets/img/hero/CC_blanco.png";
-import SKFMono from "../assets/img/hero/SKF blanco.png";
-import BoliviaMono from "../assets/img/hero/Bolivia blanco.png";
-import SoporteMono from "../assets/img/hero/Soporte blanco.png"; */
+import CintaTrFImg from "../../../assets/img/hero/Cinta transportadora Fabrica.jpeg";
+import CintaTrCImg from "../../../assets/img/hero/Cinta_transportadora_Cargada.png";
+import IndustriaImg from "../../../assets/img/hero/Industria.jpg";
 
 const carouselSlides = [
   {
-    image:
-      "https://images.unsplash.com/photo-1513828742140-ccaa28f3eda0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwyfHxpbmR1c3RyaWFsJTIwbWFjaGluZXJ5JTIwaHlkcmF1bGljJTIwc3lzdGVtc3xlbnwxfHx8fDE3ODAyODUwMTd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: IndustriaImg,
     title: "Soluciones Industriales Confiables",
     subtitle:
       "Más de 25 años brindando repuestos, fabricación especializada y soporte técnico para la industria boliviana.",
@@ -50,54 +46,54 @@ export default function Hero() {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setPreviousSlide(currentSlide);
-      setCurrentSlide(
-        (prev) => (prev + 1) % carouselSlides.length,
-      );
+      // Primero difuminar el contenido
       setContentVisible(false);
-      // El contenido aparece después de que la imagen comienza a transicionar
-      setTimeout(() => setContentVisible(true), 1000);
+      
+      // Después de que el contenido se difumine, cambiar slide
+      setTimeout(() => {
+        setPreviousSlide(currentSlide);
+        setCurrentSlide((prev) => (prev + 1) % carouselSlides.length);
+      }, 800);
+      
+      // Mostrar el nuevo contenido después de que la imagen empiece a transicionar
+      setTimeout(() => setContentVisible(true), 2000);
     }, 7000);
-
-    // Inicialmente mostrar contenido
-    //setContentVisible(true);
 
     return () => clearInterval(timer);
   }, [currentSlide]);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Fondo negro semitransparente con imagen visible - Overlay más ligero */}
+      {/* Fondo con imagen */}
       <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-black/15 to-black/10">
-        {/* Imagen actual con escala suave */}
         <img
           src={carouselSlides[currentSlide].image}
           alt="Industrial background"
-          className="absolute w-full h-full object-cover transition-all duration-[4000ms] ease-in-out scale-105"
+          className="absolute w-full h-full object-cover transition-opacity duration-[4000ms] ease-in-out"
           style={{ opacity: 1 }}
         />
 
-        {/* Imagen anterior para transición cross-fade */}
         {previousSlide !== currentSlide && (
           <img
             src={carouselSlides[previousSlide].image}
             alt=""
-            className="absolute w-full h-full object-cover transition-all duration-[4000ms] ease-in-out scale-100"
+            className="absolute w-full h-full object-cover transition-opacity duration-[4000ms] ease-in-out"
             style={{ opacity: 0 }}
             aria-hidden="true"
           />
         )}
 
-        {/* Overlay negro semitransparente - Más ligero para resaltar imagen */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/20 to-black/15"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="max-w-3xl">
-          {/* Badge con animación */}
-          <div 
-            className={`inline-block bg-white/10 border border-white/30 rounded-full px-4 py-2 mb-6 backdrop-blur-sm transition-all duration-1000 delay-300 ${
-              contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
+          {/* Badge */}
+          <div
+            className={`inline-block bg-white/10 border border-white/30 rounded-full px-4 py-2 mb-6 backdrop-blur-sm transition-all duration-[1500ms] ease-in-out ${
+              contentVisible
+                ? "opacity-100 blur-0"
+                : "opacity-0 blur-md"
             }`}
           >
             <p className="text-white text-sm font-medium">
@@ -105,28 +101,37 @@ export default function Hero() {
             </p>
           </div>
 
-          {/* Contenido del carrusel - Título */}
-          <h1 
-            className={`text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight transition-all duration-1000 delay-500 ${
-              contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            }`}
-          >
-            {carouselSlides[currentSlide].title}
-          </h1>
+          {/* CONTENEDOR CON ALTURA FIJA para evitar saltos */}
+          <div className="min-h-[280px] sm:min-h-[320px] lg:min-h-[360px] flex flex-col justify-center">
+            {/* Título con difuminación suave */}
+            <h1
+              className={`text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight transition-all duration-[1500ms] ease-in-out ${
+                contentVisible
+                  ? "opacity-100 blur-0"
+                  : "opacity-0 blur-lg"
+              }`}
+            >
+              {carouselSlides[currentSlide].title}
+            </h1>
 
-          {/* Contenido del carrusel - Subtítulo */}
-          <p 
-            className={`text-xl text-white/90 mb-8 leading-relaxed transition-all duration-1000 delay-700 ${
-              contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            }`}
-          >
-            {carouselSlides[currentSlide].subtitle}
-          </p>
+            {/* Subtítulo con difuminación suave */}
+            <p
+              className={`text-xl text-white/90 mb-8 leading-relaxed transition-all duration-[1500ms] ease-in-out delay-200 ${
+                contentVisible
+                  ? "opacity-100 blur-0"
+                  : "opacity-0 blur-lg"
+              }`}
+            >
+              {carouselSlides[currentSlide].subtitle}
+            </p>
+          </div>
 
-          {/* Botones con animación */}
-          <div 
-            className={`flex flex-col sm:flex-row gap-4 mb-12 transition-all duration-1000 delay-1000 ${
-              contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+          {/* Botones */}
+          <div
+            className={`flex flex-col sm:flex-row gap-4 mb-12 transition-all duration-[1500ms] ease-in-out delay-300 ${
+              contentVisible
+                ? "opacity-100 blur-0"
+                : "opacity-0 blur-md"
             }`}
           >
             <a
@@ -144,20 +149,24 @@ export default function Hero() {
             </a>
           </div>
 
-          {/* Indicadores del carrusel */}
-          <div 
-            className={`flex gap-2 mt-8 justify-center sm:justify-start transition-all duration-1000 delay-1000 ${
-              contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+          {/* Indicadores */}
+          <div
+            className={`flex gap-2 mt-8 justify-center sm:justify-start transition-all duration-[1500ms] ease-in-out delay-300 ${
+              contentVisible
+                ? "opacity-100 blur-0"
+                : "opacity-0 blur-md"
             }`}
           >
             {carouselSlides.map((_, index) => (
               <button
                 key={index}
                 onClick={() => {
-                  setPreviousSlide(currentSlide);
-                  setCurrentSlide(index);
                   setContentVisible(false);
-                  setTimeout(() => setContentVisible(true), 800);
+                  setTimeout(() => {
+                    setPreviousSlide(currentSlide);
+                    setCurrentSlide(index);
+                  }, 800);
+                  setTimeout(() => setContentVisible(true), 2000);
                 }}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
                   index === currentSlide

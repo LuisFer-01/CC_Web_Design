@@ -1,5 +1,5 @@
 import { ChevronDown, ChevronRight, Menu, Phone, Search, X } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CCBlanco from "../assets/img/navigation/Logo_CC_Blanco.png";
 
@@ -81,26 +81,60 @@ const productCategories = [
   }
 ];
 
-// Productos populares para sugerencias
 const popularProducts = [
-  'Correas en V Gates',
-  'Rodamientos SKF',
-  'Mangueras Hidráulicas',
-  'Retenes SKF',
-  'Cadenas de Rodillos',
-  'Correas Dentadas Mitsuba'
+  'Correas',
+  'Rodamientos',
+  'Mangueras',
+  'Retenes',
+  'Cadenas',
+  'Poleas'
 ];
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [showProducts, setShowProducts] = useState(false);
   const [activeCategory, setActiveCategory] = useState<number | null>(null);
+  const [mobileActiveCategory, setMobileActiveCategory] = useState<number | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
   const navigate = useNavigate();
 
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        searchContainerRef.current &&
+        !searchContainerRef.current.contains(event.target as Node)
+      ) {
+        setShowSuggestions(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  // Bloquear scroll cuando el menú móvil está abierto
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
   const handleCategoryClick = (index: number) => {
     setActiveCategory(activeCategory === index ? null : index);
+  };
+
+  const handleMobileCategoryClick = (index: number) => {
+    setMobileActiveCategory(mobileActiveCategory === index ? null : index);
   };
 
   const handleSearch = (e: React.FormEvent) => {
@@ -109,6 +143,7 @@ export default function Navigation() {
       navigate(`/products?search=${encodeURIComponent(searchQuery)}`);
       setSearchQuery('');
       setShowSuggestions(false);
+      setIsOpen(false);
     }
   };
 
@@ -116,37 +151,45 @@ export default function Navigation() {
     navigate(`/products?search=${encodeURIComponent(suggestion)}`);
     setSearchQuery('');
     setShowSuggestions(false);
+    setIsOpen(false);
   };
 
-  // Cierra sugerencias al hacer clic fuera
-  useEffect(() => {
-    const handleClickOutside = () => setShowSuggestions(false);
-    if (showSuggestions) {
-      document.addEventListener('click', handleClickOutside);
-      return () => document.removeEventListener('click', handleClickOutside);
-    }
-  }, [showSuggestions]);
+  const handleLogoClick = () => {
+    navigate('/');
+    setIsOpen(false);
+  };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-[#EA0A2A] z-50 shadow-lg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          <div className="flex items-center">
-            <div className="relative h-19 overflow-hidden">
+    <nav className="fixed top-0 left-0 right-0 bg-[#b1001b] z-50 shadow-lg">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16 sm:h-18 md:h-20">
+          {/* LOGO Y TEXTO CLICKEABLES - RESPONSIVO */}
+          <div 
+            className="flex items-center cursor-pointer group flex-shrink-0"
+            onClick={handleLogoClick}
+          >
+            <div className="relative h-10 w-auto sm:h-12 md:h-14 flex-shrink-0">
               <img 
                 src={CCBlanco}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                alt="Correas Center Logo"
+                className="h-full w-auto object-contain group-hover:scale-110 transition-transform duration-500"
               />
             </div>
-            <div className="text-white">
-              <h1 className="text-2xl font-bold tracking-tight">CORREAS CENTER</h1>
-              <p className="text-xs text-red-100">Solución Confiable</p>
+            <div className="text-white ml-2 sm:ml-3">
+              <h1 className="text-sm sm:text-lg md:text-xl lg:text-2xl font-bold tracking-tight group-hover:text-gray-200 transition-colors leading-tight">
+                CORREAS CENTER
+              </h1>
+              <p className="text-[10px] sm:text-xs text-red-100 leading-tight">Solución Confiable</p>
             </div>
           </div>
 
-          <div className="hidden lg:flex items-center gap-6">
+          {/* MENÚ DESKTOP */}
+          <div className="hidden lg:flex items-center gap-4 xl:gap-6">
             {/* BUSCADOR */}
-            <div className="relative" onClick={(e) => e.stopPropagation()}>
+            <div 
+              ref={searchContainerRef}
+              className="relative"
+            >
               <form onSubmit={handleSearch} className="flex items-center">
                 <input
                   type="text"
@@ -157,19 +200,18 @@ export default function Navigation() {
                   }}
                   onFocus={() => setShowSuggestions(true)}
                   placeholder="Buscar productos..."
-                  className="w-64 px-4 py-2 rounded-l-md border-0 focus:outline-none focus:ring-2 focus:ring-white text-gray-900"
+                  className="w-48 xl:w-64 px-3 xl:px-4 py-2 rounded-l-md border-0 bg-[#C0939A] focus:bg-[#D9B0B6] focus:outline-none focus:ring-2 focus:ring-white text-gray-900 placeholder:text-gray-700 transition-colors duration-200 text-sm xl:text-base"
                 />
                 <button
                   type="submit"
-                  className="bg-white text-[#EA0A2A] px-4 py-2 rounded-r-md hover:bg-gray-100 transition-colors"
+                  className="bg-white text-[#ea0a2cf8] px-3 xl:px-4 py-2 rounded-r-md hover:bg-gray-100 transition-colors"
                 >
                   <Search size={20} />
                 </button>
               </form>
 
-              {/* Sugerencias */}
               {showSuggestions && (
-                <div className="absolute top-full left-0 w-80 mt-2 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
+                <div className="absolute top-full left-0 w-64 xl:w-80 mt-2 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
                   {searchQuery.length === 0 ? (
                     <>
                       <p className="px-4 py-2 text-xs text-gray-500 font-semibold uppercase">Productos populares</p>
@@ -260,9 +302,10 @@ export default function Navigation() {
             <a href="#contacto" className="text-white hover:text-gray-200 transition-colors">Contacto</a>
           </div>
 
+          {/* BOTÓN HAMBURGUESA MÓVIL */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden text-white"
+            className="lg:hidden text-white p-2 hover:bg-white/10 rounded-md transition-colors"
             aria-label="Toggle menu"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -270,53 +313,136 @@ export default function Navigation() {
         </div>
       </div>
 
+      {/* MENÚ MÓVIL MEJORADO */}
       {isOpen && (
-        <div className="lg:hidden bg-[#C10923] border-t border-red-800">
-          <div className="px-4 py-4 space-y-3 max-h-[80vh] overflow-y-auto">
-            <form onSubmit={handleSearch} className="flex items-center mb-4">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Buscar productos..."
-                className="flex-1 px-4 py-2 rounded-l-md border-0 focus:outline-none text-gray-900"
-              />
-              <button
-                type="submit"
-                className="bg-white text-[#EA0A2A] px-4 py-2 rounded-r-md"
-              >
-                <Search size={20} />
-              </button>
-            </form>
+        <>
+          {/* Overlay oscuro */}
+          <div 
+            className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+            onClick={() => setIsOpen(false)}
+          />
+          
+          {/* Panel del menú */}
+          <div className="fixed top-16 sm:top-18 right-0 bottom-0 w-[85%] max-w-sm bg-[#b1001b] shadow-2xl lg:hidden z-50 overflow-y-auto animate-slide-in">
+            <div className="px-4 py-4 space-y-4">
+              {/* Buscador móvil */}
+              <form onSubmit={handleSearch} className="flex items-center">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Buscar productos..."
+                  className="flex-1 px-4 py-3 rounded-l-md border-0 bg-[#C0939A] focus:bg-[#D9B0B6] focus:outline-none text-gray-900 placeholder:text-gray-700 text-sm"
+                />
+                <button
+                  type="submit"
+                  className="bg-white text-[#EA0A2A] px-4 py-3 rounded-r-md"
+                >
+                  <Search size={20} />
+                </button>
+              </form>
 
-            <div className="space-y-2">
-              <p className="text-white font-bold text-sm uppercase">Productos</p>
-              {productCategories.map((category, index) => (
-                <div key={index} className="pl-4 space-y-1">
-                  <p className="text-red-100 font-semibold text-sm">{category.name}</p>
-                  {category.subcategories.map((sub, subIndex) => (
-                    <a
-                      key={subIndex}
-                      href={`/products?category=${encodeURIComponent(category.name)}&sub=${encodeURIComponent(sub)}`}
-                      className="block text-white/80 hover:text-white py-1 text-sm pl-4"
-                      onClick={() => setIsOpen(false)}
+              {/* Separador */}
+              <div className="border-t border-white/20"></div>
+
+              {/* Productos con acordeón */}
+              <div className="space-y-1">
+                <p className="text-white font-bold text-xs uppercase tracking-wider px-2 py-2">
+                  Productos
+                </p>
+                {productCategories.map((category, index) => (
+                  <div key={index} className="rounded-md overflow-hidden">
+                    <button
+                      onClick={() => handleMobileCategoryClick(index)}
+                      className="w-full flex items-center justify-between px-3 py-2.5 text-white hover:bg-white/10 transition-colors text-sm font-medium"
                     >
-                      {sub}
-                    </a>
-                  ))}
-                </div>
-              ))}
+                      <span>{category.name}</span>
+                      <ChevronDown 
+                        size={16} 
+                        className={`text-white/80 transition-transform duration-300 ${
+                          mobileActiveCategory === index ? 'rotate-180' : ''
+                        }`}
+                      />
+                    </button>
+                    
+                    {/* Subcategorías - Desplegable con animación */}
+                    <div 
+                      className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                        mobileActiveCategory === index ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+                      }`}
+                    >
+                      <div className="bg-black/20 pl-4 py-2 space-y-1">
+                        {category.subcategories.map((sub, subIndex) => (
+                          <a
+                            key={subIndex}
+                            href={`/products?category=${encodeURIComponent(category.name)}&sub=${encodeURIComponent(sub)}`}
+                            className="block text-white/90 hover:text-white hover:bg-white/10 py-2 px-3 text-sm rounded transition-all"
+                            onClick={() => setIsOpen(false)}
+                          >
+                            • {sub}
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Separador */}
+              <div className="border-t border-white/20"></div>
+
+              {/* Enlaces principales */}
+              <div className="space-y-1">
+                <a 
+                  href="#servicios" 
+                  className="flex items-center gap-3 text-white hover:bg-white/10 px-3 py-3 rounded-md transition-colors text-sm font-medium"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <span>Servicios</span>
+                </a>
+                <a 
+                  href="#industrias" 
+                  className="flex items-center gap-3 text-white hover:bg-white/10 px-3 py-3 rounded-md transition-colors text-sm font-medium"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <span>Industrias</span>
+                </a>
+                <a 
+                  href="#contacto" 
+                  className="flex items-center gap-3 text-white hover:bg-white/10 px-3 py-3 rounded-md transition-colors text-sm font-medium"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <span>Contacto</span>
+                </a>
+              </div>
+
+              {/* Botón de llamada */}
+              <a 
+                href="tel:+59133333333" 
+                className="flex items-center justify-center gap-2 bg-white text-[#EA0A2A] px-4 py-3 rounded-md font-semibold hover:bg-gray-100 transition-colors"
+              >
+                <Phone size={18} />
+                Llamar ahora
+              </a>
             </div>
-            <a href="#servicios" className="block text-white hover:text-gray-200 py-2" onClick={() => setIsOpen(false)}>Servicios</a>
-            <a href="#industrias" className="block text-white hover:text-gray-200 py-2" onClick={() => setIsOpen(false)}>Industrias</a>
-            <a href="#contacto" className="block text-white hover:text-gray-200 py-2" onClick={() => setIsOpen(false)}>Contacto</a>
-            <a href="tel:+59133333333" className="flex items-center gap-2 bg-white text-[#EA0A2A] px-4 py-3 rounded-md justify-center font-medium">
-              <Phone size={18} />
-              Llamar
-            </a>
           </div>
-        </div>
+        </>
       )}
+
+      {/* Animación CSS para el menú móvil */}
+      <style>{`
+        @keyframes slide-in {
+          from {
+            transform: translateX(100%);
+          }
+          to {
+            transform: translateX(0);
+          }
+        }
+        .animate-slide-in {
+          animation: slide-in 0.3s ease-out;
+        }
+      `}</style>
     </nav>
   );
 }

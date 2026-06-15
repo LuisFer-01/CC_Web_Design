@@ -1,41 +1,41 @@
-import { ArrowRight } from "lucide-react";
-import { useEffect, useState } from "react";
-import CintaTrFImg from "../../../assets/img/hero/Cinta transportadora Fabrica.jpeg";
-import CintaTrCImg from "../../../assets/img/hero/Cinta_transportadora_Cargada.png";
-import IndustriaImg from "../../../assets/img/hero/Industria.jpg";
+import { ArrowRight } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import CintaTrFImg from '../../../assets/img/publicPages/landingPage/hero/Cinta transportadora Fabrica.jpeg';
+import CintaTrCImg from '../../../assets/img/publicPages/landingPage/hero/Cinta_transportadora_Cargada.png';
+import IndustriaImg from '../../../assets/img/publicPages/landingPage/hero/Industria.jpg';
 
 const carouselSlides = [
   {
     image: IndustriaImg,
-    title: "Soluciones Industriales Confiables",
+    title: 'Soluciones Industriales Confiables',
     subtitle:
-      "Más de 25 años brindando repuestos, fabricación especializada y soporte técnico para la industria boliviana.",
+      'Más de 25 años brindando repuestos, fabricación especializada y soporte técnico para la industria boliviana.',
   },
   {
     image:
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwzfHxpbmR1c3RyaWFsJTIwcGFydHN8ZW58MXx8fHwxNzgwMjg1MDE3fDA&ixlib=rb-4.1.0&q=80&w=1080",
-    title: "Calidad SKF Garantizada",
+      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwzfHxpbmR1c3RyaWFsJTIwcGFydHN8ZW58MXx8fHwxNzgwMjg1MDE3fDA&ixlib=rb-4.1.0&q=80&w=1080',
+    title: 'Calidad SKF Garantizada',
     subtitle:
-      "Fabricación autorizada SKF con los más altos estándares de calidad internacional.",
+      'Fabricación autorizada SKF con los más altos estándares de calidad internacional.',
   },
   {
     image: CintaTrFImg,
-    title: "Correas y Transmisiones de Alta Resistencia",
+    title: 'Correas y Transmisiones de Alta Resistencia',
     subtitle:
-      "Amplio stock en correas en V, dentadas, variadoras y acanaladas para todo tipo de maquinaria.",
+      'Amplio stock en correas en V, dentadas, variadoras y acanaladas para todo tipo de maquinaria.',
   },
   {
     image: CintaTrCImg,
-    title: "Sistemas Hidráulicos y Neumáticos",
+    title: 'Sistemas Hidráulicos y Neumáticos',
     subtitle:
-      "Mangueras, conectores y componentes hidráulicos de las mejores marcas del mercado.",
+      'Mangueras, conectores y componentes hidráulicos de las mejores marcas del mercado.',
   },
   {
     image:
-      "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw2fHxpbmR1c3RyaWFsJTIwd2FyZWhvdXNlfGVufDF8fHx8MTc4MDI4NTAxN3ww&ixlib=rb-4.1.0&q=80&w=1080",
-    title: "Cobertura Nacional Inmediata",
+      'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw2fHxpbmR1c3RyaWFsJTIwd2FyZWhvdXNlfGVufDF8fHx8MTc4MDI4NTAxN3ww&ixlib=rb-4.1.0&q=80&w=1080',
+    title: 'Cobertura Nacional Inmediata',
     subtitle:
-      "Entregas rápidas a todo Bolivia con el respaldo de nuestro equipo técnico especializado.",
+      'Entregas rápidas a todo Bolivia con el respaldo de nuestro equipo técnico especializado.',
   },
 ];
 
@@ -63,52 +63,52 @@ export default function Hero() {
   }, [currentSlide]);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    <section className='relative min-h-screen flex items-center justify-center overflow-hidden pt-20'>
       {/* Fondo con imagen */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-black/15 to-black/10">
+      <div className='absolute inset-0 bg-gradient-to-br from-black/20 via-black/15 to-black/10'>
         <img
           src={carouselSlides[currentSlide].image}
-          alt="Industrial background"
-          className="absolute w-full h-full object-cover transition-opacity duration-[4000ms] ease-in-out"
+          alt='Industrial background'
+          className='absolute w-full h-full object-cover transition-opacity duration-[4000ms] ease-in-out'
           style={{ opacity: 1 }}
         />
 
         {previousSlide !== currentSlide && (
           <img
             src={carouselSlides[previousSlide].image}
-            alt=""
-            className="absolute w-full h-full object-cover transition-opacity duration-[4000ms] ease-in-out"
+            alt=''
+            className='absolute w-full h-full object-cover transition-opacity duration-[4000ms] ease-in-out'
             style={{ opacity: 0 }}
-            aria-hidden="true"
+            aria-hidden='true'
           />
         )}
 
-        <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/20 to-black/15"></div>
+        <div className='absolute inset-0 bg-gradient-to-r from-black/30 via-black/20 to-black/15'></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="max-w-3xl">
+      <div className='relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20'>
+        <div className='max-w-3xl'>
           {/* Badge */}
           <div
             className={`inline-block bg-white/10 border border-white/30 rounded-full px-4 py-2 mb-6 backdrop-blur-sm transition-all duration-[1500ms] ease-in-out ${
               contentVisible
-                ? "opacity-100 blur-0"
-                : "opacity-0 blur-md"
+                ? 'opacity-100 blur-0'
+                : 'opacity-0 blur-md'
             }`}
           >
-            <p className="text-white text-sm font-medium">
+            <p className='text-white text-sm font-medium'>
               Líder en Soluciones Industriales
             </p>
           </div>
 
           {/* CONTENEDOR CON ALTURA FIJA para evitar saltos */}
-          <div className="min-h-[280px] sm:min-h-[320px] lg:min-h-[360px] flex flex-col justify-center">
+          <div className='min-h-[280px] sm:min-h-[320px] lg:min-h-[360px] flex flex-col justify-center'>
             {/* Título con difuminación suave */}
             <h1
               className={`text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight transition-all duration-[1500ms] ease-in-out ${
                 contentVisible
-                  ? "opacity-100 blur-0"
-                  : "opacity-0 blur-lg"
+                  ? 'opacity-100 blur-0'
+                  : 'opacity-0 blur-lg'
               }`}
             >
               {carouselSlides[currentSlide].title}
@@ -118,8 +118,8 @@ export default function Hero() {
             <p
               className={`text-xl text-white/90 mb-8 leading-relaxed transition-all duration-[1500ms] ease-in-out delay-200 ${
                 contentVisible
-                  ? "opacity-100 blur-0"
-                  : "opacity-0 blur-lg"
+                  ? 'opacity-100 blur-0'
+                  : 'opacity-0 blur-lg'
               }`}
             >
               {carouselSlides[currentSlide].subtitle}
@@ -130,20 +130,20 @@ export default function Hero() {
           <div
             className={`flex flex-col sm:flex-row gap-4 mb-12 transition-all duration-[1500ms] ease-in-out delay-300 ${
               contentVisible
-                ? "opacity-100 blur-0"
-                : "opacity-0 blur-md"
+                ? 'opacity-100 blur-0'
+                : 'opacity-0 blur-md'
             }`}
           >
             <a
-              href="#contacto"
-              className="inline-flex items-center justify-center gap-2 bg-white text-[#EA0A2A] px-8 py-4 rounded-md hover:bg-gray-100 transition-all font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105"
+              href='#contacto'
+              className='inline-flex items-center justify-center gap-2 bg-white text-[#EA0A2A] px-8 py-4 rounded-md hover:bg-gray-100 transition-all font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105'
             >
               Solicitar Asesoría
               <ArrowRight size={20} />
             </a>
             <a
-              href="#productos"
-              className="inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-md hover:bg-white/20 transition-all font-semibold text-lg border border-white/30"
+              href='#productos'
+              className='inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-md hover:bg-white/20 transition-all font-semibold text-lg border border-white/30'
             >
               Ver Productos
             </a>
@@ -153,8 +153,8 @@ export default function Hero() {
           <div
             className={`flex gap-2 mt-8 justify-center sm:justify-start transition-all duration-[1500ms] ease-in-out delay-300 ${
               contentVisible
-                ? "opacity-100 blur-0"
-                : "opacity-0 blur-md"
+                ? 'opacity-100 blur-0'
+                : 'opacity-0 blur-md'
             }`}
           >
             {carouselSlides.map((_, index) => (
@@ -170,8 +170,8 @@ export default function Hero() {
                 }}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
                   index === currentSlide
-                    ? "bg-white w-8"
-                    : "bg-white/40 hover:bg-white/60"
+                    ? 'bg-white w-8'
+                    : 'bg-white/40 hover:bg-white/60'
                 }`}
                 aria-label={`Go to slide ${index + 1}`}
               />
@@ -180,7 +180,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
+      <div className='absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent'></div>
     </section>
   );
 }

@@ -1,9 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { productsDatabase, type Product } from '../../../../data/products';
-import ProductFilters from './ProductFilters';
-import ProductGrid from './ProductGrid';
-import SearchBar from './SearchBar';
+import Breadcrumbs from '../../commons/Breadcrumbs';
+import CategoryGrid from './components/CategoryGrid';
+import ProductFilters from './components/ProductFilters';
+import ProductGrid from './components/ProductGrid';
+
+const mainCategories = [
+  { name: 'Todos', value: '' },
+  { name: 'Correas', value: 'Correas' },
+  { name: 'Mangueras', value: 'Mangueras' },
+  { name: 'Rodamientos', value: 'Rodamientos' },
+  { name: 'Bandas', value: 'Bandas Transportadoras' },
+  { name: 'Cadenas', value: 'Cadenas' },
+  { name: 'Más', value: 'more' }
+];
 
 export default function ProductsPage() {
   const [searchParams] = useSearchParams();
@@ -12,6 +23,8 @@ export default function ProductsPage() {
   const [selectedSubcategory, setSelectedSubcategory] = useState('');
   const [selectedBrand, setSelectedBrand] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
+  const [viewMode, setViewMode] = useState<'categories' | 'products'>('categories');
+  const [activeTab, setActiveTab] = useState('');
 
   useEffect(() => {
     const search = searchParams.get('search') || '';
@@ -22,11 +35,18 @@ export default function ProductsPage() {
     setSelectedCategory(category);
     setSelectedSubcategory(subcategory);
 
-    filterProducts(search, category, subcategory, selectedBrand);
+    if (search || category || subcategory) {
+      setViewMode('products');
+      filterProducts(search, category, subcategory, selectedBrand);
+    } else {
+      setViewMode('categories');
+    }
   }, [searchParams]);
 
   useEffect(() => {
-    filterProducts(searchQuery, selectedCategory, selectedSubcategory, selectedBrand);
+    if (viewMode === 'products') {
+      filterProducts(searchQuery, selectedCategory, selectedSubcategory, selectedBrand);
+    }
   }, [selectedCategory, selectedSubcategory, selectedBrand]);
 
   const filterProducts = (
@@ -37,7 +57,6 @@ export default function ProductsPage() {
   ) => {
     let filtered = [...productsDatabase];
 
-    // Búsqueda por coincidencias parciales (case insensitive)
     if (search) {
       const searchLower = search.toLowerCase();
       filtered = filtered.filter(
@@ -51,22 +70,18 @@ export default function ProductsPage() {
       );
     }
 
-    // Filtrar por categoría
     if (category) {
       filtered = filtered.filter((product) => product.category === category);
     }
 
-    // Filtrar por subcategoría
     if (subcategory) {
       filtered = filtered.filter((product) => product.subcategory === subcategory);
     }
 
-    // Filtrar por marca
     if (brand) {
       filtered = filtered.filter((product) => product.brand === brand);
     }
 
-    // Si no hay filtros, mostrar todos los productos (o los primeros 20)
     if (!search && !category && !subcategory && !brand) {
       filtered = filtered.slice(0, 20);
     }
@@ -74,57 +89,92 @@ export default function ProductsPage() {
     setFilteredProducts(filtered);
   };
 
+  const handleCategoryClick = (categoryName: string) => {
+    setSelectedCategory(categoryName);
+    setActiveTab(categoryName);
+    setViewMode('products');
+    window.scrollTo({ top: 400, behavior: 'smooth' });
+  };
+
+  const handleTabClick = (categoryValue: string) => {
+    setActiveTab(categoryValue);
+    if (categoryValue === 'more') {
+      setViewMode('categories');
+      setSelectedCategory('');
+    } else {
+      setSelectedCategory(categoryValue);
+      setViewMode('products');
+    }
+    window.scrollTo({ top: 400, behavior: 'smooth' });
+  };
+
   return (
-    <section className="pt-28 pb-20 bg-gray-50 min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <div className="inline-block bg-[#EA0A2A]/10 rounded-full px-4 py-2 mb-4">
-            <p className="text-[#EA0A2A] font-semibold text-sm">CATÁLOGO DE PRODUCTOS</p>
-          </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Busca y Encuentra lo que Necesitas
-          </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Amplio catálogo de productos industriales de las mejores marcas
-          </p>
-        </div>
+    <section className="pt-16 sm:pt-18 md:pt-20 bg-white min-h-screen">
+      {/* Breadcrumbs */}
+      <Breadcrumbs />
 
-        <SearchBar />
-
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          <div className="lg:col-span-1">
-            <ProductFilters
-              selectedCategory={selectedCategory}
-              selectedSubcategory={selectedSubcategory}
-              selectedBrand={selectedBrand}
-              onCategoryChange={setSelectedCategory}
-              onSubcategoryChange={setSelectedSubcategory}
-              onBrandChange={setSelectedBrand}
-            />
-          </div>
-
-          <div className="lg:col-span-3">
-            <div className="mb-6 flex items-center justify-between">
-              <p className="text-gray-600">
-                Mostrando <span className="font-bold text-[#EA0A2A]">{filteredProducts.length}</span> productos
-              </p>
-              {(searchQuery || selectedCategory || selectedSubcategory || selectedBrand) && (
-                <button
-                  onClick={() => {
-                    setSelectedCategory('');
-                    setSelectedSubcategory('');
-                    setSelectedBrand('');
-                    setSearchQuery('');
-                  }}
-                  className="text-sm text-[#EA0A2A] hover:text-[#C10923] font-semibold"
-                >
-                  Limpiar filtros
-                </button>
-              )}
+      {/* Contenido Principal */}
+      <div className="py-8 lg:py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* Vista de Categorías */}
+          {viewMode === 'categories' && (
+            <div>
+              <CategoryGrid onCategoryClick={handleCategoryClick} />
             </div>
+          )}
 
-            <ProductGrid products={filteredProducts} />
-          </div>
+          {/* Vista de Productos */}
+          {viewMode === 'products' && (
+            <div>
+              {/* Tabs de Navegación */}
+              <div className="mb-8">
+                <div className="flex flex-wrap gap-1 pb-3 border-b border-gray-200">
+                  {mainCategories.map((tab) => (
+                    <button
+                      key={tab.value}
+                      onClick={() => handleTabClick(tab.value)}
+                      className={`px-5 py-2.5 text-sm font-medium transition-colors ${
+                        activeTab === tab.value
+                          ? 'text-[#EA0A2A] border-b-2 border-[#EA0A2A] -mb-[13px]'
+                          : 'text-gray-600 hover:text-[#EA0A2A]'
+                      }`}
+                    >
+                      {tab.name}
+                    </button>
+                  ))}
+                </div>
+                
+                {/* Contador de resultados */}
+                <div className="flex items-center justify-between mt-4">
+                  <p className="text-sm text-gray-600">
+                    {filteredProducts.length} {filteredProducts.length === 1 ? 'producto' : 'productos'}
+                    {selectedCategory && <span className="font-medium text-gray-900"> en {selectedCategory}</span>}
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                {/* Filtros Laterales - Solo Subcategoría y Marca */}
+                <div className="lg:col-span-1">
+                  <ProductFilters
+                    selectedCategory={selectedCategory}
+                    selectedSubcategory={selectedSubcategory}
+                    selectedBrand={selectedBrand}
+                    onCategoryChange={setSelectedCategory}
+                    onSubcategoryChange={setSelectedSubcategory}
+                    onBrandChange={setSelectedBrand}
+                    hideCategoryFilter={true} // Ocultar filtro de categoría (ya está en tabs)
+                  />
+                </div>
+
+                {/* Grid de productos */}
+                <div className="lg:col-span-3">
+                  <ProductGrid products={filteredProducts} />
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </section>

@@ -1,92 +1,112 @@
-import { ChevronDown, ChevronRight, Menu, Phone, Search, X } from 'lucide-react';
+import { ChevronDown, Menu, Phone, Search, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CCBlanco from "../assets/img/navigation/Logo_CC_Blanco.png";
+import CCBlanco from "../../assets/img/publicPages/navigation/Logo_CC_Blanco.png";
 
+// Categorías de productos
 const productCategories = [
   {
     name: 'Correas',
-    subcategories: ['Correas en V', 'Correas Dentadas', 'Correas Variadoras', 'Correas Acanaladas']
+    subcategories: ['Correas en V', 'Correas Dentadas', 'Correas Variadoras', 'Correas Acanaladas'],
+    link: '/products/correas'
   },
   {
     name: 'Mangueras',
-    subcategories: ['Mangueras Hidráulicas', 'Mangueras de Succión y de Descarga', 
-                    'Mangueras Multiusos', 'Mangueras Neumaticas']
+    subcategories: ['Mangueras Hidráulicas', 'Mangueras de Succión y de Descarga', 'Mangueras Multiusos', 'Mangueras Neumáticas'],
+    link: '/products/mangueras'
   },
   {
     name: 'Rodamientos',
-    subcategories: ['Rodamientos de Rodillos', 'Rodamientos de Bolas', 'Rodamientos de Agujas', 
-                    'Rodamientos Axiales', 'Rodamientos Lineales', 'Rodamientos Esfericos', 
-                    'Rodamientos Cilindricos', 'Rodamientos de Contacto Angular', 'Chumaceras']
+    subcategories: ['Rodamientos de Rodillos', 'Rodamientos de Bolas', 'Rodamientos de Agujas', 'Rodamientos Axiales', 'Rodamientos Lineales'],
+    link: '/products/rodamientos'
   },
   {
     name: 'Retenes, Sellos y O-rings',
-    subcategories: ['Retenes', 'Sellos Mecánicos', 'O-Rings', 'Sellos Hidráulicos', 
-                    'Sellos Neumáticos']
+    subcategories: ['Retenes', 'Sellos Mecánicos', 'O-Rings', 'Sellos Hidráulicos', 'Sellos Neumáticos'],
+    link: '/products/retenes-sellos-orings'
   },
   {
-    name: 'Bandas Transportadoras Pesadas',
-    subcategories: ['Bandas Lisas', 'Bandas Nervadas', 'Bandas Verticales', 'Bandas con Bordes', 
-                    'Bandas Corrugadas']
-  },
-  {
-    name: 'Bandas Transportadoras Livianas',
-    subcategories: ['Bandas Sinteticas', 'Bandas Modulares', 'Bandas de PTFE', 'Bandas Homogéneas', 'Bandas de Caucho Ligeras']
+    name: 'Bandas Transportadoras',
+    subcategories: ['Bandas Transportadoras Pesadas', 'Bandas Transportadoras Livianas'],
+    link: '/products/bandas-transportadoras'
   },
   {
     name: 'Cadenas',
-    subcategories: ['Cadenas de Rodillos de Precisión', 'Cadenas de Acero Inoxidable', 
-                    'Cadenas de Transmisión', 'Cadenas con Transportador', 'Cadenas Agricolas']
+    subcategories: ['Cadenas de Rodillos de Precisión', 'Cadenas de Acero Inoxidable', 'Cadenas de Transmisión', 'Cadenas con Transportador', 'Cadenas Agrícolas'],
+    link: '/products/cadenas'
   },
   {
     name: 'Poleas',
-    subcategories: ['Poleas en V de Taladro Conico Y Cilindrico', 'Poleas Sincronas', 'Poleas MI-Lock']
+    subcategories: ['Poleas en V de Taladro Cónico y Cilíndrico', 'Poleas Sincrónicas', 'Poleas MI-Lock'],
+    link: '/products/poleas'
   },
   {
     name: 'Piñones',
-    subcategories: ['Piñónes de taladro cónico', 'Piñónes con agujero piloto', 
-                    'Piñónes simples de taladro cónico para 2 cadenas', 'Piñónes simples con agujero piloto para 2 cadenas']
+    subcategories: ['Piñones de taladro cónico', 'Piñones con agujero piloto', 'Piñones simples de taladro cónico para 2 cadenas'],
+    link: '/products/pinones'
   },
   {
-    name: 'Niples, Conexiones y Conectores Hidraúlicos',
-    subcategories: ['Niples Hidráulicos', 'Niples de Cobre', 'Conexiones Rápidas', 'Adaptadores', 'Conectores Rápidos']
+    name: 'Niples, Conexiones y Conectores',
+    subcategories: ['Niples Hidráulicos', 'Niples de Cobre', 'Conexiones Rápidas', 'Adaptadores', 'Conectores Rápidos'],
+    link: '/products/niples-conexiones'
   },
   {
-    name: 'Cilindros Hidraúlicos y Neumáticos',
-    subcategories: ['Cilindros Neumáticos', 'Cilindros HTR (Tirantes)', 'Cilindros HCW (Patentado)']
+    name: 'Cilindros',
+    subcategories: ['Cilindros Neumáticos', 'Cilindros HTR (Tirantes)', 'Cilindros HCW (Patentado)'],
+    link: '/products/cilindros'
   },
   {
     name: 'Cangilones',
-    subcategories: ['Cangilones HD Stax (Heavy Duty)', 'Cangilones de Nylon', 'Cangilones de Poliuretano', 'Pernos', 'Grapas de Empalme Mécanico', 'Laterales(Sky Rubbers)']
+    subcategories: ['Cangilones HD Stax (Heavy Duty)', 'Cangilones de Nylon', 'Cangilones de Poliuretano', 'Pernos', 'Grapas de Empalme Mecánico'],
+    link: '/products/cangilones'
   },
   {
     name: 'Cardanes',
-    subcategories: ['Cardanes Agricolas']
+    subcategories: ['Cardanes Agrícolas'],
+    link: '/products/cardanes'
   },
   {
     name: 'Cajas de Comandos',
-    subcategories: ['Caja de Comando de 1 Palanca', 'Caja de Comandos de 2 Palancas',
-                    'Caja de Comandos de 3 Palancas', 'Caja de Comandos de 4 Palancas',
-                    'Caja de Comandos de 5 Palancas', 'Caja de Comandos de 6 Palancas']
+    subcategories: ['Caja de Comando de 1 Palanca', 'Caja de Comandos de 2 Palancas', 'Caja de Comandos de 3 Palancas', 'Caja de Comandos de 4 Palancas'],
+    link: '/products/cajas-comandos'
   },
   {
     name: 'Abrazaderas',
-    subcategories: ['Abrazaderas Galvanizadas', 'Abrazaderas Inoxidables', 'Abrazaderas de Tornillo', 'Abrazaderas de Alambre']
-  },
-  {
-    name: 'Servicios',
-    subcategories: ['Fabricación de Sellos SKF', 'Prensado de Mangueras', 'Reparacion de Cilindros',
-                    'Fabricación de O-rings', 'Asesoria Tecnica Industrial',
-                    'Empalmes y Montaje de Bandas Transportadoras Pesadas y Livianas']
+    subcategories: ['Abrazaderas Galvanizadas', 'Abrazaderas Inoxidables', 'Abrazaderas de Tornillo', 'Abrazaderas de Alambre'],
+    link: '/products/abrazaderas'
   }
 ];
 
+// Aplicaciones/Industrias
+const applications = [
+  { name: 'Industria Alimenticia', link: '/applications/industria-alimenticia', icon: '🍽️' },
+  { name: 'Agroindustrial', link: '/applications/agroindustrial', icon: '🌾' },
+  { name: 'Industria Minera', link: '/applications/industria-minera', icon: '⛏️' },
+  { name: 'Industria Metalúrgica', link: '/applications/industria-metalurgica', icon: '🔩' },
+  { name: 'Petróleo y Gas', link: '/applications/petroleo-gas', icon: '⛽' },
+  { name: 'Manufactura', link: '/applications/manufactura', icon: '🏭' },
+  { name: 'Construcción', link: '/applications/construccion', icon: '🏗️' },
+  { name: 'Transporte', link: '/applications/transporte', icon: '🚚' },
+  { name: 'Logística', link: '/applications/logistica', icon: '📦' }
+];
+
+// Servicios
+const services = [
+  { name: 'Fabricación de Sellos SKF', link: '/services/fabricacion-sellos-sKF' },
+  { name: 'Prensado de Mangueras', link: '/services/prensado-mangueras' },
+  { name: 'Reparación de Cilindros', link: '/services/reparacion-cilindros' },
+  { name: 'Fabricación de O-rings', link: '/services/fabricacion-orings' },
+  { name: 'Asesoría Técnica Industrial', link: '/services/asesoria-tecnica' },
+  { name: 'Empalmes y Montaje de Bandas', link: '/services/empalmes-montaje' }
+];
+
+// Productos populares para búsqueda
 const popularProducts = [
-  'Correas',
-  'Rodamientos',
-  'Mangueras',
+  'Correas en V',
+  'Rodamientos SKF',
+  'Mangueras Hidráulicas',
   'Retenes',
-  'Cadenas',
+  'Cadenas de Rodillos',
   'Poleas'
 ];
 
@@ -101,12 +121,10 @@ export default function Navigation() {
 
   const searchContainerRef = useRef<HTMLDivElement>(null);
 
+  // Cerrar sugerencias al hacer clic fuera
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        searchContainerRef.current &&
-        !searchContainerRef.current.contains(event.target as Node)
-      ) {
+      if (searchContainerRef.current && !searchContainerRef.current.contains(event.target as Node)) {
         setShowSuggestions(false);
       }
     };
@@ -163,7 +181,7 @@ export default function Navigation() {
     <nav className="fixed top-0 left-0 right-0 bg-[#b1001b] z-50 shadow-lg">
       <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 sm:h-18 md:h-20">
-          {/* LOGO Y TEXTO CLICKEABLES - RESPONSIVO */}
+          {/* LOGO Y TEXTO CLICKEABLES */}
           <div 
             className="flex items-center cursor-pointer group flex-shrink-0"
             onClick={handleLogoClick}
@@ -186,10 +204,7 @@ export default function Navigation() {
           {/* MENÚ DESKTOP */}
           <div className="hidden lg:flex items-center gap-4 xl:gap-6">
             {/* BUSCADOR */}
-            <div 
-              ref={searchContainerRef}
-              className="relative"
-            >
+            <div ref={searchContainerRef} className="relative">
               <form onSubmit={handleSearch} className="flex items-center">
                 <input
                   type="text"
@@ -206,7 +221,7 @@ export default function Navigation() {
                   type="submit"
                   className="bg-white text-[#ea0a2cf8] px-3 xl:px-4 py-2 rounded-r-md hover:bg-gray-100 transition-colors"
                 >
-                  <Search size={20} />
+                  <Search size={24} />
                 </button>
               </form>
 
@@ -234,7 +249,7 @@ export default function Navigation() {
               )}
             </div>
 
-            {/* MEGA MENÚ PRODUCTOS */}
+            {/* PRODUCTOS - MEGA MENÚ */}
             <div
               className="relative"
               onMouseEnter={() => setShowProducts(true)}
@@ -243,13 +258,13 @@ export default function Navigation() {
                 setActiveCategory(null);
               }}
             >
-              <button className="flex items-center gap-1 text-white hover:text-gray-200 transition-colors py-2">
+              <button className="flex items-center gap-1 text-white hover:text-gray-200 transition-colors py-2 font-medium">
                 Productos
                 <ChevronDown size={18} className={`transition-transform duration-200 ${showProducts ? 'rotate-180' : ''}`} />
               </button>
 
               <div
-                className={`absolute top-full left-0 w-[550px] bg-white rounded-lg shadow-2xl border border-gray-200 p-6 -translate-x-1/4 transition-all duration-300 max-h-[85vh] overflow-y-auto ${
+                className={`absolute top-full left-0 w-[600px] bg-white rounded-lg shadow-2xl border border-gray-200 p-6 -translate-x-1/4 transition-all duration-300 max-h-[85vh] overflow-y-auto ${
                   showProducts ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2 pointer-events-none'
                 }`}
               >
@@ -260,13 +275,13 @@ export default function Navigation() {
                         className="flex items-center justify-between cursor-pointer group pb-2 border-b-2 border-[#EA0A2A]"
                         onClick={() => handleCategoryClick(index)}
                       >
-                        <h3 className="font-bold text-[#EA0A2A] text-sm uppercase tracking-wide">
+                        <a href={category.link} className="font-bold text-[#EA0A2A] text-sm uppercase tracking-wide hover:underline">
                           {category.name}
-                        </h3>
-                        <ChevronRight 
+                        </a>
+                        <ChevronDown 
                           size={16} 
                           className={`text-[#EA0A2A] transition-transform duration-300 ${
-                            activeCategory === index ? 'rotate-90' : 'group-hover:translate-x-1'
+                            activeCategory === index ? 'rotate-180' : ''
                           }`} 
                         />
                       </div>
@@ -297,9 +312,50 @@ export default function Navigation() {
               </div>
             </div>
 
-            <a href="#servicios" className="text-white hover:text-gray-200 transition-colors">Servicios</a>
-            <a href="#industrias" className="text-white hover:text-gray-200 transition-colors">Industrias</a>
-            <a href="#contacto" className="text-white hover:text-gray-200 transition-colors">Contacto</a>
+            {/* APLICACIONES */}
+            <div className="relative group">
+              <button className="flex items-center gap-1 text-white hover:text-gray-200 transition-colors py-2 font-medium">
+                Aplicaciones
+                <ChevronDown size={18} className="transition-transform duration-200 group-hover:rotate-180" />
+              </button>
+              <div className="absolute top-full left-0 w-64 mt-2 bg-white rounded-lg shadow-xl border border-gray-200 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                {applications.map((app, index) => (
+                  <a
+                    key={index}
+                    href={app.link}
+                    className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 hover:text-[#EA0A2A] transition-colors"
+                  >
+                    <span>{app.icon}</span>
+                    <span>{app.name}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* SERVICIOS */}
+            <div className="relative group">
+              <button className="flex items-center gap-1 text-white hover:text-gray-200 transition-colors py-2 font-medium">
+                Servicios
+                <ChevronDown size={18} className="transition-transform duration-200 group-hover:rotate-180" />
+              </button>
+              <div className="absolute top-full left-0 w-72 mt-2 bg-white rounded-lg shadow-xl border border-gray-200 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                {services.map((service, index) => (
+                  <a
+                    key={index}
+                    href={service.link}
+                    className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 hover:text-[#EA0A2A] transition-colors"
+                  >
+                    {service.name}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* ACERCA DE */}
+            <a href="/about" className="text-white hover:text-gray-200 transition-colors font-medium">Acerca de</a>
+
+            {/* CONTACTO */}
+            <a href="/contact" className="text-white hover:text-gray-200 transition-colors font-medium">Contacto</a>
           </div>
 
           {/* BOTÓN HAMBURGUESA MÓVIL */}
@@ -313,7 +369,7 @@ export default function Navigation() {
         </div>
       </div>
 
-      {/* MENÚ MÓVIL MEJORADO */}
+      {/* MENÚ MÓVIL */}
       {isOpen && (
         <>
           {/* Overlay oscuro */}
@@ -347,9 +403,7 @@ export default function Navigation() {
 
               {/* Productos con acordeón */}
               <div className="space-y-1">
-                <p className="text-white font-bold text-xs uppercase tracking-wider px-2 py-2">
-                  Productos
-                </p>
+                <p className="text-white font-bold text-xs uppercase tracking-wider px-2 py-2">Productos</p>
                 {productCategories.map((category, index) => (
                   <div key={index} className="rounded-md overflow-hidden">
                     <button
@@ -365,7 +419,6 @@ export default function Navigation() {
                       />
                     </button>
                     
-                    {/* Subcategorías - Desplegable con animación */}
                     <div 
                       className={`overflow-hidden transition-all duration-300 ease-in-out ${
                         mobileActiveCategory === index ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
@@ -391,24 +444,54 @@ export default function Navigation() {
               {/* Separador */}
               <div className="border-t border-white/20"></div>
 
+              {/* Aplicaciones */}
+              <div className="space-y-1">
+                <p className="text-white font-bold text-xs uppercase tracking-wider px-2 py-2">Aplicaciones</p>
+                {applications.map((app, index) => (
+                  <a
+                    key={index}
+                    href={app.link}
+                    className="flex items-center gap-3 text-white hover:bg-white/10 px-3 py-2.5 rounded-md transition-colors text-sm"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <span>{app.icon}</span>
+                    <span>{app.name}</span>
+                  </a>
+                ))}
+              </div>
+
+              {/* Separador */}
+              <div className="border-t border-white/20"></div>
+
+              {/* Servicios */}
+              <div className="space-y-1">
+                <p className="text-white font-bold text-xs uppercase tracking-wider px-2 py-2">Servicios</p>
+                {services.map((service, index) => (
+                  <a
+                    key={index}
+                    href={service.link}
+                    className="flex items-center gap-3 text-white hover:bg-white/10 px-3 py-2.5 rounded-md transition-colors text-sm"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <span>{service.name}</span>
+                  </a>
+                ))}
+              </div>
+
+              {/* Separador */}
+              <div className="border-t border-white/20"></div>
+
               {/* Enlaces principales */}
               <div className="space-y-1">
                 <a 
-                  href="#servicios" 
+                  href="/about" 
                   className="flex items-center gap-3 text-white hover:bg-white/10 px-3 py-3 rounded-md transition-colors text-sm font-medium"
                   onClick={() => setIsOpen(false)}
                 >
-                  <span>Servicios</span>
+                  <span>Acerca de</span>
                 </a>
                 <a 
-                  href="#industrias" 
-                  className="flex items-center gap-3 text-white hover:bg-white/10 px-3 py-3 rounded-md transition-colors text-sm font-medium"
-                  onClick={() => setIsOpen(false)}
-                >
-                  <span>Industrias</span>
-                </a>
-                <a 
-                  href="#contacto" 
+                  href="/contact" 
                   className="flex items-center gap-3 text-white hover:bg-white/10 px-3 py-3 rounded-md transition-colors text-sm font-medium"
                   onClick={() => setIsOpen(false)}
                 >

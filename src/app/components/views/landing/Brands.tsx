@@ -1,27 +1,27 @@
 import { useEffect, useState } from 'react';
 
-import Abix from '../../../assets/img/brands/ABIX.png';
-import APC from '../../../assets/img/brands/APC.png';
-import Arca from '../../../assets/img/brands/ARCA.png';
-import FD from '../../../assets/img/brands/F&D.png';
-import FAG from '../../../assets/img/brands/FAG-2.png';
-import FBJ from '../../../assets/img/brands/FBJ.png';
-import Gates from '../../../assets/img/brands/GATES.png';
-import GMORS from '../../../assets/img/brands/GMORS.jpg';
-import HERCULES from '../../../assets/img/brands/HERCULES.jpg';
-import INA from '../../../assets/img/brands/INA.jpg';
-import Jason from '../../../assets/img/brands/JASON_MEGADYNE.jpg';
-import KFB from '../../../assets/img/brands/KFB.png';
-import Mitsuba from '../../../assets/img/brands/mitsuba.jpg';
-import NSK from '../../../assets/img/brands/NSK.png';
-import NTN from '../../../assets/img/brands/NTN.png';
-import Pabovi from '../../../assets/img/brands/Pabovi.png';
-import PerfectPower from '../../../assets/img/brands/Perfect Power.png';
-import Pix from '../../../assets/img/brands/PIX.jpg';
-import Sav from '../../../assets/img/brands/SAV.png';
-import SKF from '../../../assets/img/brands/SKF-DISTRIBUIDOR-ESPECIALISTA-EN-SELLOS-HORIZONTAL.png';
-import WorldG from '../../../assets/img/brands/WORLD GASKET.png';
-import ZMTE from '../../../assets/img/brands/ZMTE.png';
+import Abix from '../../../assets/img/publicPages/landingPage/brands/ABIX.png';
+import APC from '../../../assets/img/publicPages/landingPage/brands/APC.png';
+import Arca from '../../../assets/img/publicPages/landingPage/brands/ARCA.png';
+import FD from '../../../assets/img/publicPages/landingPage/brands/F&D.png';
+import FAG from '../../../assets/img/publicPages/landingPage/brands/FAG-2.png';
+import FBJ from '../../../assets/img/publicPages/landingPage/brands/FBJ.png';
+import Gates from '../../../assets/img/publicPages/landingPage/brands/GATES.png';
+import GMORS from '../../../assets/img/publicPages/landingPage/brands/GMORS.jpg';
+import HERCULES from '../../../assets/img/publicPages/landingPage/brands/HERCULES.jpg';
+import INA from '../../../assets/img/publicPages/landingPage/brands/INA.jpg';
+import Jason from '../../../assets/img/publicPages/landingPage/brands/JASON_MEGADYNE.jpg';
+import KFB from '../../../assets/img/publicPages/landingPage/brands/KFB.png';
+import Mitsuba from '../../../assets/img/publicPages/landingPage/brands/mitsuba.jpg';
+import NSK from '../../../assets/img/publicPages/landingPage/brands/NSK.png';
+import NTN from '../../../assets/img/publicPages/landingPage/brands/NTN.png';
+import Pabovi from '../../../assets/img/publicPages/landingPage/brands/Pabovi.png';
+import PerfectPower from '../../../assets/img/publicPages/landingPage/brands/Perfect Power.png';
+import Pix from '../../../assets/img/publicPages/landingPage/brands/PIX.jpg';
+import Sav from '../../../assets/img/publicPages/landingPage/brands/SAV.png';
+import SKF from '../../../assets/img/publicPages/landingPage/brands/SKF-DISTRIBUIDOR-ESPECIALISTA-EN-SELLOS-HORIZONTAL.png';
+import WorldG from '../../../assets/img/publicPages/landingPage/brands/WORLD GASKET.png';
+import ZMTE from '../../../assets/img/publicPages/landingPage/brands/ZMTE.png';
 
 const brands = [
   { name: 'PERFECT POWER', logo: PerfectPower },

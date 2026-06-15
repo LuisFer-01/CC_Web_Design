@@ -1,7 +1,7 @@
 import { Droplets, MessageCircle, Settings, Shield, Wrench } from 'lucide-react';
-import FabricacionImg from '../../../assets/img/services/Fabricacion_SKF.jpeg';
-import MangueraImg from '../../../assets/img/services/Manguera_Prensada.jpeg';
-import AsesoriaImg from '../../../assets/img/services/Servicio_Tecnico.png';
+import FabricacionImg from '../../../assets/img/publicPages/landingPage/services/Fabricacion_SKF.jpeg';
+import MangueraImg from '../../../assets/img/publicPages/landingPage/services/Manguera_Prensada.jpeg';
+import AsesoriaImg from '../../../assets/img/publicPages/landingPage/services/Servicio_Tecnico.png';
 
 const services = [
   {

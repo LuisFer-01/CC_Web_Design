@@ -1,3 +1,7 @@
+import CorreaDentada from '../app/assets/img/publicPages/productPage/Correa_Dentada.jpg';
+import CorreaV from '../app/assets/img/publicPages/productPage/Correa_V.png';
+import CorreaVariadora from '../app/assets/img/publicPages/productPage/Correa_Variadora.webp';
+
 export interface Product {
   code: string;
   name: string;
@@ -11,22 +15,31 @@ export interface Product {
 export const productsDatabase: Product[] = [
   // CORREAS
   {
-    code: 'COR-V-001',
-    name: 'Correa en V A68',
-    category: 'Correas',
-    subcategory: 'Correas en V',
-    brand: 'Gates',
-    description: 'Correa en V perfil A, longitud 68 pulgadas. Alta resistencia y durabilidad.',
-    image: 'https://via.placeholder.com/300x200?text=Correa+V+Gates'
-  },
-  {
     code: 'COR-V-002',
     name: 'Correa en V B42',
     category: 'Correas',
     subcategory: 'Correas en V',
     brand: 'Mitsuba',
     description: 'Correa en V perfil B para transmisión industrial pesada.',
-    image: 'https://via.placeholder.com/300x200?text=Correa+V+Mitsuba'
+    image: CorreaV
+  },
+  {
+    code: 'COR-V-001',
+    name: 'Correa en V A68',
+    category: 'Correas',
+    subcategory: 'Correas en V',
+    brand: 'Gates',
+    description: 'Correa en V perfil A, longitud 68 pulgadas. Alta resistencia y durabilidad.',
+    image: CorreaV
+  },
+  {
+    code: 'COR-V-003',
+    name: 'Correa en V C90',
+    category: 'Correas',
+    subcategory: 'Correas en V',
+    brand: 'Perfect Power',
+    description: 'Correa industrial perfil C para aplicaciones pesadas.',
+    image: CorreaV
   },
   {
     code: 'COR-D-001',
@@ -35,7 +48,7 @@ export const productsDatabase: Product[] = [
     subcategory: 'Correas Dentadas',
     brand: 'Mitsuba',
     description: 'Correa dentada HTD paso 5mm, sincronización precisa.',
-    image: 'https://via.placeholder.com/300x200?text=Correa+Dentada'
+    image: CorreaDentada
   },
   {
     code: 'COR-D-002',
@@ -44,7 +57,16 @@ export const productsDatabase: Product[] = [
     subcategory: 'Correas Dentadas',
     brand: 'Megadyne',
     description: 'Correa dentada de alta precisión para maquinaria industrial.',
-    image: 'https://via.placeholder.com/300x200?text=Correa+Dentada+8M'
+    image: CorreaDentada
+  },
+  {
+    code: 'COR-D-003',
+    name: 'Correa Dentada T5-500',
+    category: 'Correas',
+    subcategory: 'Correas Dentadas',
+    brand: 'Gates',
+    description: 'Correa sincronizada paso T5 para maquinaria de precisión.',
+    image: CorreaDentada
   },
   {
     code: 'COR-VA-001',
@@ -53,7 +75,7 @@ export const productsDatabase: Product[] = [
     subcategory: 'Correas Variadoras',
     brand: 'PIX',
     description: 'Correa variadora de velocidad para sistemas de transmisión.',
-    image: 'https://via.placeholder.com/300x200?text=Correa+Variadora'
+    image: CorreaVariadora
   },
   {
     code: 'COR-AC-001',
@@ -63,24 +85,6 @@ export const productsDatabase: Product[] = [
     brand: 'Gates',
     description: 'Correa acanalada multi-estriada para equipos de alta velocidad.',
     image: 'https://via.placeholder.com/300x200?text=Correa+Acanalada'
-  },
-  {
-    code: 'COR-V-003',
-    name: 'Correa en V C90',
-    category: 'Correas',
-    subcategory: 'Correas en V',
-    brand: 'Perfect Power',
-    description: 'Correa industrial perfil C para aplicaciones pesadas.',
-    image: 'https://via.placeholder.com/300x200?text=Correa+V+C90'
-  },
-  {
-    code: 'COR-D-003',
-    name: 'Correa Dentada T5-500',
-    category: 'Correas',
-    subcategory: 'Correas Dentadas',
-    brand: 'Gates',
-    description: 'Correa sincronizada paso T5 para maquinaria de precisión.',
-    image: 'https://via.placeholder.com/300x200?text=Correa+T5'
   },
 
   // MANGUERAS

@@ -1,22 +1,22 @@
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
-//import CangilonImg from '../assets/images/products/cangilones.png';
-import AbrazaderasImg from '../../../assets/img/products/Abrazaderas.jpg';
-import BandasLImg from '../../../assets/img/products/Bandas_Transportadoras_Livianas.png';
-import BandasPImg from '../../../assets/img/products/Bandas_Transportadoras_Pesadas.jpg';
-import CadenasImg from '../../../assets/img/products/Cadenas.jpg';
-import CangilonesImg from '../../../assets/img/products/Cangilon.jpg';
-import CardanesImg from '../../../assets/img/products/Cardanes.jpg';
-import CilindrosNImg from '../../../assets/img/products/Cilindro_Neumatico.jpg';
-import ComandosImg from '../../../assets/img/products/Comandos.jpg';
-import CorreasImg from '../../../assets/img/products/Correas.jpg';
-import ManguerasImg from '../../../assets/img/products/Mangueras.jpg';
-import NiplesImg from '../../../assets/img/products/Niples_Casquillos_ConectoresHidraulicos.png';
-import PiñonesImg from '../../../assets/img/products/Piñones.jpg';
-import PoleasImg from '../../../assets/img/products/Poleas.jpg';
-import RetenesImg from '../../../assets/img/products/Retenes_Sellos_Cubetas.png';
-import RodamientosImg from '../../../assets/img/products/Rodamientos.jpg';
-import MangueraImg from '../../../assets/img/services/Manguera_Prensada.jpeg';
+//import CangilonImg from 'assets/images/products/cangilones.png';
+import AbrazaderasImg from '../../../assets/img/publicPages/landingPage/products/Abrazaderas.jpg';
+import BandasLImg from '../../../assets/img/publicPages/landingPage/products/Bandas_Transportadoras_Livianas.png';
+import BandasPImg from '../../../assets/img/publicPages/landingPage/products/Bandas_Transportadoras_Pesadas.jpg';
+import CadenasImg from '../../../assets/img/publicPages/landingPage/products/Cadenas.jpg';
+import CangilonesImg from '../../../assets/img/publicPages/landingPage/products/Cangilon.jpg';
+import CardanesImg from '../../../assets/img/publicPages/landingPage/products/Cardanes.jpg';
+import CilindrosNImg from '../../../assets/img/publicPages/landingPage/products/Cilindro_Neumatico.jpg';
+import ComandosImg from '../../../assets/img/publicPages/landingPage/products/Comandos.jpg';
+import CorreasImg from '../../../assets/img/publicPages/landingPage/products/Correas.jpg';
+import ManguerasImg from '../../../assets/img/publicPages/landingPage/products/Mangueras.jpg';
+import NiplesImg from '../../../assets/img/publicPages/landingPage/products/Niples_Casquillos_ConectoresHidraulicos.png';
+import PiñonesImg from '../../../assets/img/publicPages/landingPage/products/Piñones.jpg';
+import PoleasImg from '../../../assets/img/publicPages/landingPage/products/Poleas.jpg';
+import RetenesImg from '../../../assets/img/publicPages/landingPage/products/Retenes_Sellos_Cubetas.png';
+import RodamientosImg from '../../../assets/img/publicPages/landingPage/products/Rodamientos.jpg';
+import MangueraImg from '../../../assets/img/publicPages/landingPage/services/Manguera_Prensada.jpeg';
 
 const products = [
   {
